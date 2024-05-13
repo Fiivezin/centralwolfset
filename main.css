@@ -1,0 +1,76 @@
+body {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background: rgb(255,0,0);
+    background: linear-gradient(0deg, rgba(255,0,0,1) 0%, rgba(251,110,110,1) 35%, rgba(255,0,0,1) 100%);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px; /* Espaçamento entre o título e o formulário */
+}
+h3 {
+    text-align: center;
+}
+input[type="text"],
+select,
+textarea {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+textarea {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    height: 100px;
+}
+
+input[type="submit"] {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #fa0a0a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    font-family: "Expletus Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #ff3434;
+}
+
+/* Estilos para tornar o formulário responsivo */
+@media screen and (max-width: 600px) {
+    .container {
+        max-width: 90%;
+    }
+}
