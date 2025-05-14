@@ -7,73 +7,104 @@
     <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="./media/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="./media/logo.png">
 </head>
 <body>
-    <div class="container">
+<div class="container">
     <h1>Wolfset🐺</h1>
+
     <form id="messageForm">
         <label for="messageType">Selecione o Tipo de Mensagem:</label><br>
         <select id="messageType" name="messageType">
             <option value="Padrao">Aparelho Pronto</option>
+            <option value="AvaliacaoPronta">Avaliação Pronta</option>
             <option value="AguardandoPeca">Aguardando Peça</option>
             <option value="Personalizada">Mensagem Personalizada</option>
         </select><br><br>
 
-        <div id="messageInput" style="display: none;">
+        <div id="messageInput" style="display:none;">
             <label for="message">Mensagem Personalizada:</label><br>
             <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
         </div>
-        
+
         <label for="phoneNumber">Número de Telefone (DDD, sem espaços ou caracteres especiais):</label><br>
         <input type="text" id="phoneNumber" name="phoneNumber"><br><br>
-        
+
         <input type="submit" value="Enviar Mensagem">
     </form>
+
     <h3>By Fiivezin 🙈</h3>
 </div>
-    <script>
-        document.getElementById("messageType").addEventListener("change", function() {
-            var messageType = this.value;
-            var messageInput = document.getElementById("messageInput");
-            
-            if (messageType === "Personalizada") {
-                messageInput.style.display = "block";
-            } else {
-                messageInput.style.display = "none";
-            }
-        });
 
-        document.getElementById("messageForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Impede o envio do formulário padrão
-            
-            var messageType = document.getElementById("messageType").value;
-            var phoneNumber = document.getElementById("phoneNumber").value;
-            var message = "";
+<script>
+document.getElementById('messageType').addEventListener('change', function () {
+    const messageInput = document.getElementById('messageInput');
+    messageInput.style.display = this.value === 'Personalizada' ? 'block' : 'none';
+});
 
-            switch(messageType) {
-                case "Personalizada":
-                    message = document.getElementById("message").value;
-                    break;
-                case "AguardandoPeca":
-                    message = "📱 Prezado Cliente,\n\nGostaríamos de informar que, infelizmente, precisaremos de um pouco mais de tempo para concluir a manutenção do seu aparelho. Estamos aguardando a chegada da peça de reposição necessária para realizar o reparo.\n\nPedimos sinceras desculpas pelo transtorno causado e pela espera adicional que isso possa gerar. Estamos trabalhando diligentemente para resolver essa questão o mais rápido possível e assim que a peça chegar, prosseguiremos com o serviço imediatamente.\n\nEntendemos que a sua confiança em nossos serviços é fundamental e queremos assegurar que estamos fazendo o máximo para resolver essa situação da melhor forma possível.\n\nAgradecemos pela sua compreensão e paciência. 🙏\n\nAtenciosamente,\nEquipe Wolfset🐺.";
-                    break;
-                default:
-                    // Mensagem padrão "Aparelho Pronto"
-                    message = "📱 Prezado Cliente,\n\nÉ com satisfação que informamos que o seu aparelho está pronto para ser retirado na nossa loja! Nossa equipe de técnicos concluiu a manutenção com sucesso e seu celular está agora em perfeitas condições de funcionamento.\n\nEstamos abertos de segunda a sexta-feira, das 9h às 18h, e aos sábados das 9h às 13h. Fique à vontade para passar quando for mais conveniente para você.\n\nCaso tenha alguma dúvida ou precise de mais alguma informação, não hesite em nos contatar.\n\nAgradecemos pela confiança em nossos serviços e esperamos vê-lo em breve!\n\nAtenciosamente,\nEquipe Wolfset🐺.";
-                    break;
-            }
+document.getElementById('messageForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-            // Substitua os espaços por vazio e caracteres especiais pelo código HTML correspondente
-            phoneNumber = phoneNumber.replace(/\s/g, '').replace(/[-().\s]/g, '');
+    const type  = document.getElementById('messageType').value;
+    const phone = document.getElementById('phoneNumber').value.replace(/[-().\s]/g, '');
+    let   message = '';
 
-            // Construa o link com o número de telefone e a mensagem
-            var whatsappLink = "http://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+    switch (type) {
+        case 'Personalizada':
+            message = document.getElementById('message').value;
+            break;
 
-            // Redirecione para o link do WhatsApp
-            window.location.href = whatsappLink;
-        });
-    </script>
+        case 'AvaliacaoPronta':
+            message = `📱 Prezado Cliente,
+
+Temos boas notícias! A avaliação técnica do seu aparelho foi concluída e já temos o diagnóstico completo.
+
+Entre em contato conosco ou visite a loja para conhecer os detalhes e autorizar o serviço, caso deseje prosseguir. Estamos à disposição para esclarecer qualquer dúvida.
+
+Agradecemos pela confiança em nossos serviços!
+
+Atenciosamente,
+Equipe Wolfset🐺.`;
+            break;
+
+        case 'AguardandoPeca':
+            message = `📱 Prezado Cliente,
+
+Gostaríamos de informar que, infelizmente, precisaremos de um pouco mais de tempo para concluir a manutenção do seu aparelho. Estamos aguardando a chegada da peça de reposição necessária para realizar o reparo.
+
+Pedimos desculpas pelo transtorno e garantimos que prosseguiremos assim que a peça chegar.
+
+Agradecemos pela compreensão! 🙏
+
+Atenciosamente,
+Equipe Wolfset🐺.`;
+            break;
+
+        default: // Aparelho Pronto
+            message = `📱 Prezado Cliente,
+
+É com satisfação que informamos que o seu aparelho está pronto para ser retirado em nossa loja!
+
+Horário de atendimento:
+• Seg-sex 09h-18h
+• Sábados 09h-13h
+
+Qualquer dúvida, estamos à disposição.
+
+Atenciosamente,
+Equipe Wolfset🐺.`;
+            break;
+    }
+
+    const whatsappLink =
+        'https://api.whatsapp.com/send?phone=' +
+        encodeURIComponent(phone) +
+        '&text=' +
+        encodeURIComponent(message);
+
+    window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+});
+</script>
 </body>
 </html>
