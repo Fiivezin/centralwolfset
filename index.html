@@ -69,7 +69,7 @@
             phoneNumber = phoneNumber.replace(/\s/g, '').replace(/[-().\s]/g, '');
 
             // Construa o link com o número de telefone e a mensagem
-            var whatsappLink = "http://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+            var whatsappLink = "http://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message) target="_blank";
 
             // Redirecione para o link do WhatsApp
             window.location.href = whatsappLink;
